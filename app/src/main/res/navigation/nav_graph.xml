@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/noteListFragment">
+
+    <fragment
+        android:id="@+id/noteListFragment"
+        android:name="com.thuraaung.notes.frag.list.NoteListFragment"
+        android:label="fragment_note_list"
+        tools:layout="@layout/fragment_note_list">
+
+        <action
+            android:id="@+id/action_noteList_to_noteAdd"
+            app:destination="@id/noteAddFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+
+        <action
+            android:id="@+id/action_noteList_to_searchNote"
+            app:destination="@id/searchNoteFragment" />
+
+        <action
+            android:id="@+id/action_noteList_to_editNote"
+            app:destination="@id/editNoteFragment" />
+
+        <action
+            android:id="@+id/action_noteListFragment_to_noteAddFragment"
+            app:destination="@id/noteAddFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/noteAddFragment"
+        android:name="com.thuraaung.notes.frag.add.NoteAddFragment"
+        android:label="fragment_note_add"
+        tools:layout="@layout/fragment_note_add" >
+        <argument
+            android:name="note"
+            app:argType="com.thuraaung.notes.model.NoteModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/searchNoteFragment"
+        android:name="com.thuraaung.notes.frag.search.SearchNoteFragment"
+        android:label="fragment_search_note"
+        tools:layout="@layout/fragment_search_note" >
+        <action
+            android:id="@+id/action_searchNoteFragment_to_noteAddFragment"
+            app:destination="@id/noteAddFragment" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/editNoteFragment"
+        android:name="com.thuraaung.notes.frag.edit.EditNoteFragment"
+        android:label="fragment_edit_note"
+        tools:layout="@layout/fragment_edit_note" >
+        <argument
+            android:name="note"
+            app:argType="com.thuraaung.notes.model.NoteModel" />
+    </fragment>
+</navigation>

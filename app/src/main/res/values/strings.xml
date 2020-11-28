@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Notes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_note">Search Note</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_note">No note found</string>
+    <string name="sample_date">2020/11/23 2:23:00 PM</string>
+    <string name="title">Title</string>
+    <string name="note">Note</string>
+</resources>
