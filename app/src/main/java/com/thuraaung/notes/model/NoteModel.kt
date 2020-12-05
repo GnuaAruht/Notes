@@ -10,11 +10,7 @@ data class NoteModel(
     val id : Int = getRandomNumber(),
     val title : String = "",
     val note : String = "",
-    val ownerUid : String = "",
-    val ownerEmail : String = "",
     val color : String = "#ffffff",
-    val isReadOnly : Boolean = true,
     val creationDate : Date = Date(),
     val modifiedDate : Date = Date(),
-    val receivers : List<AppUser> = listOf()
 ) : Parcelable

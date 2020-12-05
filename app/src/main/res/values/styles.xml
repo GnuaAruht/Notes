@@ -9,7 +9,7 @@
     <style name="MaterialAlertDialog.App.Title.Text"
         parent="MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textSize">20sp</item>
-        <!--        <item name="android:textColor">@color/red</item>-->
+                <item name="android:textColor">?attr/colorOnPrimary</item>
     </style>
 
     <style name="MaterialAlertDialog.App.Body.Text"
@@ -29,10 +29,25 @@
 
     <style name="Widget.App.DeleteButton"
         parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textColor">?attr/colorError</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:padding">8dp</item>
         <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="Widget.App.SignOutButton"
+        parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="backgroundTint">?attr/colorSecondary</item>
+        <item name="cornerRadius">0dp</item>
+    </style>
+
+    <style name="Widget.App.DeleteAccountButton"
+        parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="backgroundTint">?attr/colorError</item>
     </style>
 
 </resources>

@@ -1,38 +1,32 @@
-package com.thuraaung.notes.frag.search
+package com.thuraaung.notes.frag
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.transition.TransitionInflater
 import com.thuraaung.notes.R
-import com.thuraaung.notes.frag.list.NoteListAdapter
-import com.thuraaung.notes.frag.list.NoteListFragmentDirections
-import com.thuraaung.notes.frag.list.NoteListViewModel
+import com.thuraaung.notes.databinding.FragmentSearchNoteBinding
+import com.thuraaung.notes.adapter.NoteListAdapter
+import com.thuraaung.notes.vm.NoteListViewModel
 
 
 class SearchNoteFragment : DialogFragment() {
 
     private val viewModel : NoteListViewModel by activityViewModels()
 
-    private val noteListAdapter = NoteListAdapter { note ->
-        val action = SearchNoteFragmentDirections.actionSearchNoteFragmentToNoteAddFragment(note)
+    private val noteListAdapter = NoteListAdapter { _ , note ->
+        val action = SearchNoteFragmentDirections.actionSearchNoteToNoteAdd(note)
         findNavController().navigate(action)
     }
 
-    private lateinit var rvNoteSearch : RecyclerView
-    private lateinit var etSearch : EditText
-    private lateinit var btnCancel : Button
+    private lateinit var binding : FragmentSearchNoteBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,29 +38,33 @@ class SearchNoteFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search_note, container, false)
+        binding = FragmentSearchNoteBinding.inflate(inflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        btnCancel = view.findViewById(R.id.btn_cancel)
-        etSearch = view.findViewById(R.id.et_search)
-        etSearch.requestFocus()
-
         noteListAdapter.updateNoteList(viewModel.filterNote(""))
 
-        etSearch.doAfterTextChanged { text ->
-            noteListAdapter.updateNoteList(viewModel.filterNote(text.toString()))
+        binding.etSearch.requestFocus()
+        binding.etSearch.doAfterTextChanged { text ->
+            val noteList = viewModel.filterNote(text.toString())
+            if (noteList.isEmpty()) {
+                binding.rvSearchNote.visibility = View.GONE
+                binding.lblNoNote.visibility = View.VISIBLE
+            } else {
+                binding.rvSearchNote.visibility = View.VISIBLE
+                binding.lblNoNote.visibility = View.GONE
+            }
+            noteListAdapter.updateNoteList(noteList)
         }
 
-        btnCancel.setOnClickListener {
+        binding.btnCancel.setOnClickListener {
             dismiss()
         }
 
-        rvNoteSearch = view.findViewById(R.id.rv_search_note)
-        rvNoteSearch.apply {
+        binding.rvSearchNote.apply {
             layoutManager = StaggeredGridLayoutManager(2,LinearLayoutManager.VERTICAL)
             adapter = noteListAdapter
         }

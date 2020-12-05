@@ -1,4 +1,4 @@
-package com.thuraaung.notes.frag.list
+package com.thuraaung.notes.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +10,7 @@ import com.thuraaung.notes.R
 import com.thuraaung.notes.model.NoteModel
 
 class NoteListAdapter(private val noteClickListener :
-                      ((note : NoteModel) -> Unit)? = null) : RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
+                      ((view : View,note : NoteModel) -> Unit)? = null) : RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
 
     private var noteList = emptyList<NoteModel>()
 
@@ -39,13 +39,14 @@ class NoteListAdapter(private val noteClickListener :
 
         init {
             view.setOnClickListener {
-                noteClickListener?.invoke(noteList[adapterPosition])
+                noteClickListener?.invoke(it,noteList[adapterPosition])
             }
         }
 
         fun bind(note : NoteModel) {
 
             tvTitle.text = note.title
+            tvTitle.visibility = if(note.title.isEmpty()) View.GONE else View.VISIBLE
             tvNote.text = note.note
             tvDate.text = DateFormatter.formatDate(note.creationDate)
         }

@@ -1,4 +1,4 @@
-package com.thuraaung.notes.frag.add
+package com.thuraaung.notes.frag
 
 import android.os.Bundle
 import android.text.Editable
@@ -7,8 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,12 +18,11 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.thuraaung.notes.R
 import com.thuraaung.notes.databinding.FragmentNoteAddBinding
-import com.thuraaung.notes.databinding.FragmentNoteListBinding
-import com.thuraaung.notes.frag.list.NoteListViewModel
 import com.thuraaung.notes.model.AppUser
 import com.thuraaung.notes.model.NoteModel
+import com.thuraaung.notes.uitls.DateFormatter
+import com.thuraaung.notes.vm.NoteListViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.layout_noteadd_tool_bar.view.*
 import java.util.*
 import javax.inject.Inject
 
@@ -47,7 +44,6 @@ class NoteAddFragment : Fragment() {
 
         val tempTitle = binding.etTitle.text.toString().trim()
         val tempNote = binding.etNote.text.toString().trim()
-
         return (tempNote.isNotBlank() && tempNote.isNotEmpty() && if(isAddAction) true else { tempTitle != note!!.title || tempNote != note!!.note })
     }
 
@@ -86,7 +82,9 @@ class NoteAddFragment : Fragment() {
 
         updateActionSave(false)
 
-        binding.layoutToolbar.lbl_label.text = if (isAddAction) "Add Note" else "Edit Note"
+        binding.lblDate.text = DateFormatter.formatDate(if (isAddAction) Date() else note!!.creationDate)
+
+        binding.layoutToolbar.lblLabel.text = if (isAddAction) "Add Note" else "Edit Note"
 
         binding.etTitle.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -95,7 +93,6 @@ class NoteAddFragment : Fragment() {
                 binding.etTitle.removeTextChangedListener(noteTextWatcher)
             }
         }
-
         binding.etNote.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 binding.etNote.addTextChangedListener(noteTextWatcher)
@@ -104,18 +101,17 @@ class NoteAddFragment : Fragment() {
             }
         }
 
-        binding.layoutToolbar.img_back.setOnClickListener {
+        binding.layoutToolbar.imgBack.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        binding.layoutToolbar.img_save.setOnClickListener {
+        binding.layoutToolbar.imgSave.setOnClickListener {
             saveNote()
             findNavController().popBackStack()
         }
 
-
-        binding.layoutToolbar.img_delete.visibility = if (isAddAction) View.GONE else View.VISIBLE
-        binding.layoutToolbar.img_delete.setOnClickListener {
+        binding.layoutToolbar.imgDelete.visibility = if (isAddAction) View.GONE else View.VISIBLE
+        binding.layoutToolbar.imgDelete.setOnClickListener {
 
             MaterialAlertDialogBuilder(requireContext(),R.style.ThemeOverlay_App_AlertDialog)
                 .setTitle("Confirm")
@@ -159,7 +155,7 @@ class NoteAddFragment : Fragment() {
 
     private fun updateActionSave(isEnable : Boolean) {
 
-        binding.layoutToolbar.img_save.apply {
+        binding.layoutToolbar.imgSave.apply {
             isEnabled = isEnable
             imageAlpha = if (isEnable) 255 else 100
         }
@@ -177,9 +173,6 @@ class NoteAddFragment : Fragment() {
                 title = tempTitle,
                 note = tempNote,
                 color = "#ffffff",
-                ownerUid = mAuth.currentUser!!.uid,
-                ownerEmail = mAuth.currentUser!!.email!!,
-                receivers = listOf(),
                 creationDate = Date(),
                 modifiedDate = Date(currentMillis)),
                 doOnSuccess = {},

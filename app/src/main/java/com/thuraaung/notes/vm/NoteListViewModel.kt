@@ -1,6 +1,5 @@
-package com.thuraaung.notes.frag.list
+package com.thuraaung.notes.vm
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,8 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.MetadataChanges
+import com.google.firebase.firestore.Query
 import com.thuraaung.notes.model.NoteModel
 import com.thuraaung.notes.uitls.Constants.ALL_NOTE
+import com.thuraaung.notes.uitls.Constants.PERSONAL_NOTE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -32,8 +33,10 @@ class NoteListViewModel @ViewModelInject constructor(
         viewModelScope.launch(Dispatchers.IO) {
 
             db.collection(ALL_NOTE)
-                .whereEqualTo("ownerUid",mAuth.currentUser!!.uid)
-                .addSnapshotListener(MetadataChanges.INCLUDE) { value, _ ->
+                .document(mAuth.currentUser!!.uid)
+                .collection(PERSONAL_NOTE)
+                .orderBy("creationDate",Query.Direction.DESCENDING)
+                .addSnapshotListener { value, _ ->
 
                     value?.let {
 
@@ -66,7 +69,9 @@ class NoteListViewModel @ViewModelInject constructor(
         viewModelScope.launch(Dispatchers.IO) {
 
             db.collection(ALL_NOTE)
-                .document("${noteId}")
+                .document(mAuth.currentUser!!.uid)
+                .collection(PERSONAL_NOTE)
+                .document("$noteId")
                 .update(noteData)
                 .addOnSuccessListener {
                     doOnSuccess.invoke()
@@ -82,6 +87,8 @@ class NoteListViewModel @ViewModelInject constructor(
         viewModelScope.launch(Dispatchers.IO) {
 
             db.collection(ALL_NOTE)
+                .document(mAuth.currentUser!!.uid)
+                .collection(PERSONAL_NOTE)
                 .document("${note.id}")
                 .set(note)
                 .addOnSuccessListener {
@@ -98,6 +105,8 @@ class NoteListViewModel @ViewModelInject constructor(
         viewModelScope.launch(Dispatchers.IO) {
 
             db.collection(ALL_NOTE)
+                .document(mAuth.currentUser!!.uid)
+                .collection(PERSONAL_NOTE)
                 .document("${note.id}")
                 .delete()
                 .addOnSuccessListener {

@@ -4,8 +4,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="search_note">Search Note</string>
     <string name="cancel">Cancel</string>
-    <string name="no_note">No note found</string>
+    <string name="no_note">Add your note</string>
     <string name="sample_date">2020/11/23 2:23:00 PM</string>
     <string name="title">Title</string>
     <string name="note">Note</string>
+    <string name="no_note_found">No Note Found</string>
+    <string name="waiting_for_internet">Waiting for network</string>
+    <string name="user_name">User name</string>
+    <string name="example_email">example@gmail.com</string>
+    <string name="sign_out">Sign out</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="user_profile">User Profile</string>
 </resources>

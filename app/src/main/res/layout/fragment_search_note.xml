@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".frag.search.SearchNoteFragment">
+    tools:context=".frag.SearchNoteFragment">
 
     <EditText
         android:id="@+id/et_search"
@@ -16,12 +15,12 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/bg_search"
         android:drawablePadding="10dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:focusedByDefault="true"
         android:hint="@string/search_note"
         android:inputType="text"
         android:padding="10dp"
-        android:focusable="true"
-        android:focusedByDefault="true"
-        android:focusableInTouchMode="true"
         android:transitionName="note_search"
         app:drawableStartCompat="@drawable/ic_search_24"
         app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
@@ -30,15 +29,31 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_cancel"
-        android:text="@string/cancel"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/cancel"
         android:textColor="?attr/colorError"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/Widget.MaterialComponents.Button.TextButton" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lbl_no_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/no_note_found"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_cancel" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_note"
@@ -51,6 +66,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_cancel" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_cancel"
+        tools:listitem="@layout/layout_note_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
