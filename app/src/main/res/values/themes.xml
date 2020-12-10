@@ -19,6 +19,7 @@
 <!--        <item name="statusBarBackground">?attr/colorOnSurface</item>-->
         <item name="android:windowLightStatusBar">@bool/isLightStatusBar</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
         <item name="fontFamily">sans-serif-medium</item>
 
     </style>
