@@ -7,7 +7,7 @@
     tools:context=".frag.ProfileDialogFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="500dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 

@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import coil.load
 import coil.transform.CircleCropTransformation
@@ -12,8 +11,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.thuraaung.notes.R
 import com.thuraaung.notes.databinding.FragmentProfileDialogBinding
-import com.thuraaung.notes.uitls.revokeAccess
-import com.thuraaung.notes.uitls.signOutUser
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

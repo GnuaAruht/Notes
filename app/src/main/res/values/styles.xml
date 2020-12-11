@@ -5,7 +5,6 @@
         <item name="android:windowIsFloating">false</item>
     </style>
 
-
     <style name="MaterialAlertDialog.App.Title.Text"
         parent="MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textSize">20sp</item>
@@ -50,11 +49,36 @@
         <item name="backgroundTint">?attr/colorError</item>
     </style>
 
-    <style name="Widget.App.NoteCard" parent="Widget.MaterialComponents.CardView">
+    <style name="Widget.App.CardView.NoteCard" parent="Widget.MaterialComponents.CardView">
 
         <item name="shapeAppearance">?attr/shapeAppearanceMediumComponent</item>
         <item name="cardElevation">4dp</item>
         <item name="android:layout_margin">8dp</item>
+
+    </style>
+
+    <style name="Widget.App.TextView.NoteTitle" parent="Widget.MaterialComponents.TextView">
+
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?attr/colorOnBackground</item>
+        <item name="fontFamily">?attr/fontFamily</item>
+
+    </style>
+
+    <style name="Widget.App.TextView.NoteText"
+        parent="Widget.MaterialComponents.TextView">
+
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/colorSecondaryVariant</item>
+        <item name="fontFamily">?attr/fontFamily</item>
+
+    </style>
+
+    <style name="Widget.App.TextView.NoteDate" parent="Widget.MaterialComponents.TextView">
+
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">?attr/colorSecondary</item>
+        <item name="fontFamily">?attr/fontFamily</item>
 
     </style>
 

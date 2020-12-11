@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/Widget.App.NoteCard">
+    style="@style/Widget.App.CardView.NoteCard">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:ellipsize="end"
             android:maxLines="3"
             android:text="Note Title"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            style="@style/Widget.App.TextView.NoteTitle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
             android:ellipsize="end"
             android:maxLines="5"
             android:text="This is a note"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            style="@style/Widget.App.TextView.NoteText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
@@ -49,8 +49,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="10/11/2020 10:11:11 PM"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-            android:textColor="?attr/colorSecondary"
+            style="@style/Widget.App.TextView.NoteDate"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

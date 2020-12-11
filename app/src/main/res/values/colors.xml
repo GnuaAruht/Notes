@@ -7,6 +7,7 @@
     <!--    <color name="colorSecondary">#2196f3</color>-->
     <color name="colorSecondary">#2962ff</color>
     <color name="colorOnSecondary">#fafafa</color>
+    <color name="colorSecondaryVariant">#707070</color>
 
     <color name="colorSurface">#eceff1</color>
     <color name="colorOnSurface">#000000</color>
