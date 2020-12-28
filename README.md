@@ -8,7 +8,7 @@ Day mode | Night mode
 ### :warning: Wraning !
 #### Before run the repository, make sure to add google.json under the app directory.
 
-## Used labraries 
+## Used libraries 
 1. Navigation architecture
 1. View binding
 1. Dagger hilt
